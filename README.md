@@ -1,5 +1,5 @@
 # Robotics-Vision-Projects
-
+I have started from very basics you will probably get any errors.
 A comprehensive collection of **robotics and computer vision projects** featuring autonomous systems, object detection, and navigation using modern robotics frameworks.
 
 ## 📋 Table of Contents
@@ -82,7 +82,7 @@ git clone https://github.com/Goharsk47/Robotics-Vision-Projects.git
 cd Robotics-Vision-Projects
 
 # (Optional) Create a Python virtual environment
-python3 -m venv venv
+python3 -m venv venv  #to create seperate python environment
 source venv/bin/activate  # On Windows: venv\\Scripts\\activate
 ```
 
