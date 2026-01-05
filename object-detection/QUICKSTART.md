@@ -1,58 +1,57 @@
 # Quick Start Guide - Object Detection
 
-## 5 मिनट में शुरुआत करो 🚀
 
 ### Step 1: Install Python & Dependencies
 
 ```bash
-# Python 3.8+ install करो
+#Install Python 3.8+ 
 python3 --version
 
-# Dependencies install करो
+#Install  Dependencies
 pip install -r requirements.txt
 ```
 
 ### Step 2: Run Real-Time Detection (Webcam)
 
 ```bash
-# सीधे चलाओ
+
 python robot_vision_detection.py --source webcam
 
-# Results outputs/ folder में save होंगे
+# Results outputs/ It will save in the folder.
 ```
 
-**Screen पर क्या देखोगे:**
-- Green bounding boxes objects के चारों ओर
-- Class name और confidence percentage
+**Look at the screen:**
+- Green bounding boxes objects(the objects are covered with the green boxes)
+- Class name and confidence percentage
 - Real-time detection
 - Press 'q' to quit
 
-### Step 3: Image पर Test करो
+### Step 3: TEST ON THE IMAGE
 
 ```bash
-# अपनी image file path दो
+# Give your image file path
 python robot_vision_detection.py --source path/to/your_image.jpg
 
-# Result outputs/ में save होगा
+# Result must save in the outputs.
 ```
 
-### Step 4: Video पर Test करो
+### Step 4: Test on the video
 
 ```bash
-# Video file path दो
+# Give video file path.
 python robot_vision_detection.py --source path/to/your_video.mp4
 
-# Processed video outputs/ में save होगा
+# Processed video must be saved in the outputs
 ```
 
-### Confidence Threshold Adjust करो
+### Adjust the confidence threshold
 
 ```bash
 # Default: 0.5 (50%)
-# कम confidence = ज्यादा detections
+# Less confidence = More detections
 python robot_vision_detection.py --source webcam --confidence 0.3
 
-# ज्यादा confidence = कम false positives
+# More confidence = Less false positives
 python robot_vision_detection.py --source webcam --confidence 0.7
 ```
 
@@ -61,14 +60,14 @@ python robot_vision_detection.py --source webcam --confidence 0.7
 ```python
 # Main class
 RobotVisionDetector
-  ├── detect_objects()      # TensorFlow से detection
-  ├── draw_detections()     # Boxes और labels draw करो
-  ├── process_webcam()      # Live webcam से
-  ├── process_image()       # Static image से
-  └── process_video()       # Video file से
+  ├── detect_objects()      # Detection from tensorflow
+  ├── draw_detections()     # Draw boxes and labels
+  ├── process_webcam()      # From live webcam
+  ├── process_image()       # From static image
+  └── process_video()       # From video file
 ```
 
-## कौन से Objects Detect करेगा?
+## Which object will detect?
 
 90+ COCO classes:
 - **People & Animals**: person, cat, dog, horse, cow, bird...
@@ -81,23 +80,22 @@ RobotVisionDetector
 
 ### Error: "Cannot open webcam"
 ```bash
-# USB camera properly connected है?
-# Ubuntu पर: sudo usermod -a -G video $USER
+# USB camera properly connected or not check it first?
+# Ubuntu: sudo usermod -a -G video $USER
 ```
 
 ### Very Slow Performance
 ```bash
-# Confidence threshold increase करो
+#Increase Confidence threshold
 python robot_vision_detection.py --source webcam --confidence 0.7
 
-# Model lite version का use हो रहा है (पहले से fast)
+# The lite version of the model is being used (it is already faster than the standard one).
 ```
 
-### Model Download नहीं हो रहा?
+### Is the model not downloading?
 ```bash
-# Internet check करो
-# Proxy के पीछे हो तो set करो:
-export HTTP_PROXY=your_proxy_url
+# Check the Internet 
+# If behind a proxy, set these:export HTTP_PROXY=your_proxy_url
 export HTTPS_PROXY=your_proxy_url
 ```
 
@@ -105,24 +103,24 @@ export HTTPS_PROXY=your_proxy_url
 
 ```
 outputs/
-├── detection_YYYYMMDD_HHMMSS.jpg  # Webcam frames (हर 30 frames)
+├── detection_YYYYMMDD_HHMMSS.jpg  # Webcam frames 
 ├── detection_result.jpg            # Image processing result
 └── detection_video.avi             # Processed video
 ```
 
 ## Next Steps
 
-1. ✅ Webcam पर test कर ले
-2. ✅ अपनी images/videos use कर
-3. ✅ Confidence threshold experiment कर
-4. ✅ Custom objects के लिए model fine-tune कर (advanced)
+1. ✅Use your own images/videos 
+2. ✅ Experiment with confidence threshold
+3. ✅ Fine-tune model for custom objects (advanced)
 
 ## Tips 💡
 
 - **Webcam Quality**: Better camera = Better detections
-- **Lighting**: Good lighting में ज्यादा accurate
-- **Speed**: GPU use करने से 5-10x faster
-- **Accuracy**: Pre-trained model पहले से बहुत good है
+
+- **Webcam Quality**: Better camera → Better detections- **Speed**:  Using GPU makes it 5-10x faster
+
+- **Lighting**: Good lighting provides more accurate results- **Accuracy**: Pre-trained model  is already very good
 
 ---
 
