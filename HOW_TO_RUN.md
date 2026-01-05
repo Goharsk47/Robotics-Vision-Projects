@@ -2,64 +2,64 @@
 
 ## 📌 Project 1: Object Detection for Robotic Vision
 
-### कैसे करें? (Step-by-Step)
+###  (Step-by-Step)
 
-#### 1️⃣ Setup करो (5 minutes)
+#### 1️⃣ Setup (5 minutes)
 
 ```bash
-# Terminal खोलो और चलाओ:
+# Open Terminal:
 cd object-detection/
 pip install -r requirements.txt
 ```
 
-**क्या होगा?**
-- TensorFlow, OpenCV और सभी dependencies download होंगे
-- पहली बार ~3-5 minute लगेगा
+**What will happen?**
+- TensorFlow, OpenCV and all dependencies will download.
+- First it will take 3-5 mins
 
-#### 2️⃣ Webcam से Live Detection चलाओ
+#### 2️⃣ Webcam Live Detection
 
 ```bash
-# सबसे सीधा तरीका:
+# Easiest wayy:
 python robot_vision_detection.py --source webcam
 ```
 
-**क्या दिखेगा:**
+**What will appear?:**
 - Real-time camera feed
-- Green boxes objects के चारों ओर
+- Green boxes objects 
 - Class name + Confidence percentage
 - Press 'q' to quit
 
-**अगर कैमरा नहीं खुला:**
+**What If camera will not work?:**
 ```bash
-# Ubuntu पर:
+# Ubuntu:
 sudo usermod -a -G video $USER
 ```
 
-#### 3️⃣ Image File पर Test करो
+#### 3️⃣ Test on the Image file
 
 ```bash
-# अपनी image file का path दो:
+# Give path of your Imange file:
 python robot_vision_detection.py --source /path/to/image.jpg
-# या
+
 python robot_vision_detection.py --source ~/Desktop/photo.png
 ```
 
-**Result कहाँ मिलेगा?**
-- `outputs/detection_result.jpg` में
-- Detected objects के साथ boxes होंगे
+**Result**
+- `outputs/detection_result.jpg` 
+- Detected objects with boxes 
 
-#### 4️⃣ Video File पर Test करो
+#### 4️⃣ Test on the Video File
 
 ```bash
-# Video process करो:
+# Video process:
 python robot_vision_detection.py --source /path/to/video.mp4
 ```
 
-**Output मिलेगा:**
-- `outputs/detection_video.avi` में
-- सभी objects detected होंगे
+**Output:**
+- `outputs/detection_video.avi` 
+- All objects will get detected 
 
-#### 5️⃣ Sensitivity Adjust करो
+#### 5️⃣ Adjust the sensitivity 
 
 ```bash
 # कम confident detections दिखाओ:
