@@ -62,100 +62,100 @@ python robot_vision_detection.py --source /path/to/video.mp4
 #### 5️⃣ Adjust the sensitivity 
 
 ```bash
-# कम confident detections दिखाओ:
+# show less confident detections:
 python robot_vision_detection.py --source webcam --confidence 0.3
 
-# सिर्फ high confidence detections:
+# Only high confidence detections:
 python robot_vision_detection.py --source webcam --confidence 0.8
 ```
 
-### Code क्या करती है?
+### What will the code do?
 
 ```python
 RobotVisionDetector class
-├── TensorFlow Hub से pre-trained model लोड करता है
-├── हर frame पर neural network चलाता है
-├── Objects detect करता है (person, car, dog, etc.)
-├── Green boxes और labels draw करता है
-└── Output frames save करता है
+├── Load pre-trained model from tensorflow
+├── Neural network will run on each frame.
+├── Objects detect (person, car, dog, etc.)
+├── Green boxes and labels are drawn
+└── Output frames are saved 
 ```
 
 ### Common Issues & Solutions
 
 | Issue | Solution |
 |-------|----------|
-| "Cannot open webcam" | USB camera check करो, Ubuntu पर usermod command चलाओ |
-| Very slow (FPS कम) | Confidence बढ़ाओ (0.7 या 0.8) |
-| Model download नहीं हो रहा | Internet check करो, proxy set करो |
-| Memory error | Resolution कम करो या GPU use करो |
+| "Cannot open webcam" | USB camera check , Ubuntu: Run usermod command |
+| Very slow (FPS Less) | Increase Confidence (0.7 or 0.8) |
+| Model is not downloading | Check the internet, Set the proxy|
+| Memory error | Decrease the resolution and use the GPU|
 
 ---
 
 ## 📌 Project 2: Patrolling Robot with ROS 2 Navigation
 
-### कैसे करें? (Step-by-Step)
+### (Step-by-Step)
 
-#### 1️⃣ ROS 2 Install करो
+#### 1️⃣ Install ROS 2
 
 ```bash
-# Ubuntu 22.04 पर:
+# Ubuntu 22.04 :
 wget https://repo.ros2.org/ros.key -O - | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main"
 sudo apt update
 sudo apt install ros-humble-desktop
 ```
 
-#### 2️⃣ Workspace Setup करो
+#### 2️⃣ Workspace Setup
 
 ```bash
-# नया workspace बनाओ:
+# Create new workspace:
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws
 
-# Project files copy करो:
+# Copy the Project files:
 cp -r /path/to/patrolling-robot-ros2 src/
 
-# Build करो:
+# Build:
 colcon build
 
-# Source करो:
+# Source:
 source install/setup.bash
 ```
 
-#### 3️⃣ Gazebo + Nav2 + Robot Launch करो
+#### 3️⃣ Gazebo + Nav2 + Robot Launch
 
 ```bash
-# Terminal 1 में:
+# Terminal 1 :
 cd ~/ros2_ws
 source install/setup.bash
 ros2 launch patrol_robot_pkg patrol_demo.launch.py
 ```
 
-**क्या होगा:**
-1. Gazebo simulator खुल जाएगा
-2. RViz visualization खुल जाएगा
-3. Robot simulation शुरू हो जाएगी
+**What will happen:**
+1. It will open Gazebo simulator
+2. It will open RViz visualization
+3. It will open Robot simulation 
 
-#### 4️⃣ Patrol Start करो
+#### 4️⃣ Patrol Start
 
 ```bash
-# Terminal 2 में:
+# Terminal 2 :
 ros2 service call /patrol_robot/start_patrol std_srvs/Empty
 ```
 
-**Robot क्या करेगा:**
-- Predefined waypoints पर जाएगा
-- Obstacles से बचेगा (Nav2 automatically)
-- Patrol log maintain करेगा
-- Starting point पर लौटेगा
+**What will the Robot do:**
+- It will go on Predefined waypoints
+- Will avoid the obstacles  (Nav2 automatically)
+- It will maintain Patrol log
+- Come back at Starting point 
 
-#### 5️⃣ Monitoring करो
+#### 5️⃣ Monitoring
 
 ```bash
-# Terminal 3 में - Status check करो:
+# Terminal 3 - Status check:
 ros2 topic echo /patrol/status
 
-# Terminal 4 में - Log देखो:
+# Terminal 4  - Log :
 tail -f patrol_log.csv
 ```
 
@@ -187,23 +187,23 @@ timestamp,waypoint_id,x,y,theta,status
 
 ### Customization
 
-**अपने waypoints add करने के लिए:**
+** waypoints add:**
 
-1. `patrol_node.py` खोलो
-2. ढूंढो: `WAYPOINTS = [...] `
-3. अपने coordinates add करो:
+1. `patrol_node.py`
+2. Find: `WAYPOINTS = [...] `
+3. Add the coordinates 
 
 ```python
 WAYPOINTS = [
-    (2.0, 2.0, 0.0),      # तुम्हारा waypoint 1
-    (5.0, 2.0, 1.57),     # तुम्हारा waypoint 2
+    (2.0, 2.0, 0.0),      #  waypoint 1
+    (5.0, 2.0, 1.57),     # waypoint 2
     (0.0, 0.0, 0.0)       # Return home
 ]
 ```
 
 ---
 
-## 🎯 दोनों Projects को एक साथ Use करना
+## 🎯 If you want to use both the project together
 
 ### Scenario: Robot with Vision
 
@@ -223,11 +223,12 @@ ros2 service call /patrol_robot/start_patrol std_srvs/Empty
 
 **Integration idea:**
 - Robot patrols on predefined path (Project 2)
-- नताऱा detected objects को see करता है (Project 1)
-- अगर कोई object detect हो तो:
-  - Alert दे सकता है
-  - Path change कर सकता है
-  - Log में record कर सकता है
+-Sees The detected objects (Project 1)
+- If any object detected:
+  - It can give an alert.
+  - It can change the path.
+  -It can record in the log.
+
 
 ---
 
@@ -250,16 +251,16 @@ ros2 service call /patrol_robot/start_patrol std_srvs/Empty
 ## ⚡ Performance Tips
 
 ### Object Detection
-✅ GPU use करो (5-10x faster)
-✅ Confidence threshold बढ़ाओ (faster, less accurate)
-✅ Lower resolution use करो
-✅ Good lighting में work करो
+✅ Use the GPU (5-10x faster)
+✅Increase the Confidence threshold (faster, less accurate)
+✅ Lower resolution 
+✅ Work in Good lighting  
 
 ### Patrolling Robot
-✅ Waypoints को navigation map के अंदर रखो
-✅ Gazebo को medium detail पर चलाओ
-✅ Nav2 parameters को environment से match करो
-✅ Costmap resolution appropriate रखो
+✅ You should keep the waypoint in the navigation map.
+✅ Run gazebo on medium details
+✅ Match Nav 2 parameter with the environment
+✅ Keep costmap resolution appropriate 
 
 ---
 
